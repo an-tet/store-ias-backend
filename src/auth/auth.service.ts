@@ -14,6 +14,12 @@ import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
+	checkAuthStatus(user: User) {
+		return {
+			...user,
+			token: this.getJwt({ id: user.id }),
+		};
+	}
 	private logger = new Logger('ProductService');
 	constructor(
 		@InjectRepository(User)
@@ -39,7 +45,7 @@ export class AuthService {
 			});
 			await this.userRepository.save(userCreated);
 			delete userCreated.password;
-			return userCreated;
+			return { ...userCreated, token: this.getJwt({ id: userCreated.id }) };
 		} catch (error) {
 			console.log(error);
 

@@ -6,9 +6,13 @@ import {
 	Patch,
 	Param,
 	Delete,
+	UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
+import { GetUser } from './decorators/get-user/get-user.decorator';
 import { CreateUserDto, LoginUserDto } from './dto';
+import { User } from './entities/user.entity';
 
 @Controller('auth')
 export class AuthController {
@@ -22,6 +26,11 @@ export class AuthController {
 	@Post('login')
 	login(@Body() loginUserDto: LoginUserDto) {
 		return this.authService.login(loginUserDto);
+	}
+	@Get('validate-token')
+	@UseGuards(AuthGuard())
+	checkAuthStatus(@GetUser() user: User) {
+		return this.authService.checkAuthStatus(user);
 	}
 
 	@Get()
