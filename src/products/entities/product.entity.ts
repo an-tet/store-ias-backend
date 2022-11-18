@@ -14,25 +14,25 @@ export class Product {
 	@Column('float', {
 		default: 0,
 	})
-	price?: number;
+	price: number;
 
 	@Column('text', {
 		nullable: true,
 	})
-	description?: string;
+	description: string;
 
 	@Column('float', {
 		default: 0,
 	})
-	stock?: number;
+	stock: number;
 
 	@Column('text', {
 		array: true,
 	})
-	sizes: string[];
+	sizes?: string[];
 
 	@Column('text')
-	gender: string;
+	gender?: string;
 
 	@OneToMany(() => ProductImage, (productImage) => productImage.product, {
 		cascade: true,

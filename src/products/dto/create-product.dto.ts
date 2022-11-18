@@ -18,27 +18,25 @@ export class CreateProductDto {
 
 	@IsNumber()
 	@IsPositive()
-	@IsOptional()
-	price?: number;
+	price: number;
 
 	@IsString()
-	@IsOptional()
-	description?: string;
+	description: string;
 
 	@IsInt()
 	@IsPositive()
 	@IsOptional()
-	stock?: number;
+	stock: number;
 
 	@IsString({ each: true })
 	@IsArray()
-	sizes: string[];
+	sizes?: string[];
 
 	@IsIn(['hombre', 'mujer', 'niño', 'unisex'])
-	gender: string;
+	gender?: string;
 
 	// @IsString({ each: true })
-	@IsBase64({ each: true })
+	@IsMimeType({ each: true })
 	@IsArray()
 	@IsOptional()
 	images?: string[];

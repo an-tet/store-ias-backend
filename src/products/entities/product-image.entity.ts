@@ -5,7 +5,7 @@ export class ProductImage {
 	@PrimaryGeneratedColumn()
 	id: number;
 
-	@Column('bytea')
+	@Column('text')
 	image: string;
 
 	@ManyToOne(() => Product, (product) => product.images, {
